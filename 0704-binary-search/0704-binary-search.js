@@ -3,24 +3,20 @@
  * @param {number} target
  * @return {number}
  */
-const search = function(nums, target) {
-  let m = Math.floor(nums.length / 2);
-  if (nums[m] === target) return m;
-  let l = 0;
-  let r = nums.length - 1;
-  while (l < r) {
-    if (nums[m] === target) return m;
-    else if (nums[l] === target) return l;
-    else if (nums[r] === target) return r;
+var search = function(nums, target) {
+  let [l, r] = [0, nums.length - 1];
+  while (l <= r) {
+    const m = (l + r) >> 1 
+    const guess = nums[m];
     
-    else if (nums[m] < target) {
-      l = m + 1;
-      m = Math.floor(r/l) + l
-    }
-    else {
-      r = m - 1;
-      m = Math.floor(r/2)
-    }
+    const isTarget = guess === target;
+    if (isTarget) return m
+    
+    const isTargetGreater = guess < target;
+    if (isTargetGreater) l = m + 1;
+    
+    const isTargetLess = target < guess;
+    if (isTargetLess) r = m - 1;
   }
   return - 1
 };
