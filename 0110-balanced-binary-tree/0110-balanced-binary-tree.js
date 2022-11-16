@@ -27,11 +27,16 @@ The root node has a leftMaxHeight of 1 and a rightMaxHeight of 2.
 */
 
 var isBalanced = function(root) {   
-// 
+// declare a const labled dfs assigned to an anonymous function that takes in one param
   const dfs = (root) => {
+//  if the root is undefined the return 0
     if (!root) return 0
+//  destructure and array declared to a const with its zeroth index labled as left and its first index labled as right
+//  assign that to an array with its 0th index as the invocation of dfs with its arguments as root.left, and its 1st index as the invocation of dfs with its argument as the root.right
     const [left, right] = [dfs(root.left), dfs(root.right)];
+//  if the left var equals -1 or the right var equals -1 or the absolute value of the left and right is greater than 1 return -1
     if (left === -1 || right === -1 || Math.abs(left - right) > 1) return -1;
+//  return 1 + the max of the left and the right
     return 1 + Math.max(left, right)
   } 
 // return true as long as the evaluated result does not equal negative one
