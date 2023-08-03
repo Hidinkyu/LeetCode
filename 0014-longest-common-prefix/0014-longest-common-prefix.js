@@ -3,26 +3,15 @@
  * @return {string}
  */
 var longestCommonPrefix = function(strs) {
-    if (!strs || strs.length === 0) {
-        return "";
-    }
+    if (!strs || !strs.length) return "";
     
-    let commonPrefix = strs[0];
+    let prefix = strs[0];
+    
     for (let word of strs) {
         let char = 0;
-        
-        while (char < commonPrefix.length && char < word.length && commonPrefix[char] === word[char]) {
-            char++;
-        }
-        
-        commonPrefix = commonPrefix.slice(0, char);
-        
-        if (commonPrefix === "") {
-            // If at any point the common prefix becomes an empty string,
-            // there's no need to continue, as there can't be a common prefix anymore.
-            break;
-        }
+        while (char < prefix.length && char < word.length && prefix[char] === word[char]) char++
+        prefix = word.slice(0, char);
+        if (prefix === 0) break
     }
-    
-    return commonPrefix;
+    return prefix
 };
