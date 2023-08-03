@@ -4,10 +4,11 @@
  */
 var groupAnagrams = function(strs) {
     const groups = new Map();
+        const charCounts = new Array(26).fill(0); 
     
     for (let str of strs) {
-        const charCounts = new Array(26).fill(0); // Reset character counts for each word
-
+        charCounts.fill(0)// Reset character counts for each word
+    
         // Count characters in the current word
         for (let char of str) {
             const index = char.charCodeAt(0) - 'a'.charCodeAt(0);
