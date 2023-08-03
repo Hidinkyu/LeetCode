@@ -5,14 +5,17 @@
  */
 var isAnagram = function(s, t) {
     if (s.length !== t.length) return false;
-    const obj = {};
-    for (let i in s) {
-        if (!obj[s[i]]) obj[s[i]] = 1;
-        else obj[s[i]] += 1;
+    const map = new Map();
+    for (let c of s) {
+        map.set(c, (map.get(c) || 0) + 1);
     }
-    for (let i in t) {
-        if(!obj[t[i]]) return false
-        else obj[t[i]] -= 1;
+    
+    for (let c of t) {
+        if (!map.get(c)) return false;
+        map.set(c, map.get(c) - 1)
+        if(map.get(c) === 0) map.delete(c);
     }
-    return true;
+    
+    if (!map.has()) return true;
+    
 };
