@@ -4,10 +4,12 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    const obj = {};
-    for (let i = 0; i < nums.length; i++) {
-        if (obj.hasOwnProperty(nums[i])) return [obj[nums[i]], i];
-        else obj[target - nums[i]] = i;
+    const map = new Map();
+    
+    for(let i = 0; i < nums.length; i++) {
+        const num = nums[i];
+        const diff = target - num;
+        if (map.has(diff)) return [i, map.get(diff)]
+        map.set(num, i);
     }
-    return false
 };
