@@ -1,29 +1,22 @@
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} root
- * @param {TreeNode} subRoot
- * @return {boolean}
- */
-const isSubtree = function(root, subRoot) {
-    if(!subRoot) return true;
-    if(!root) return false;
-    
-    if(checkTree(root,subRoot)) return true;
-    
-    return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
-};
-
-const checkTree = (s, t) => {
-    if (!s && !t) return true;
-    if (s && t && s.val === t.val) {
-        return checkTree(s.left, t.left) && checkTree(s.right, t.right);
+function isSubtree(root, subRoot) {
+    if (root === null) {
+        return false; // Base case: if we have traversed past leaf, there's no match.
+    } else if (isSameTree(root, subRoot)) {
+        return true; // Return true if we find a match.
+    } else {
+        // Otherwise, keep traversing.
+        return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
     }
-    return false;
+}
+
+function isSameTree(root1, root2) {
+    if (root1 === null || root2 === null) {
+        return root1 === root2; // If either are null, return true only if both are.
+    } else if (root1.val === root2.val) {
+        // If the values of the roots are the same, check the children.
+        return isSameTree(root1.left, root2.left) && isSameTree(root1.right, root2.right);
+    } else {
+        // If the values are not the same, return false.
+        return false;
+    }
 }
